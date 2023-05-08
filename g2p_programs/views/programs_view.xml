@@ -21,12 +21,14 @@ Part of OpenG2P. See LICENSE file for full copyright and licensing details.
                     widget="badge"
                     string="State"
                 />
+                <field name="have_members" invisible="1" />
                 <button
                     type="object"
                     icon="fa-users"
                     class="oe_stat_button"
                     name="open_eligible_beneficiaries_form"
                     string="Beneficiaries list"
+                    attrs="{'invisible': [('have_members','=',False)]}"
                 />
                 <field name="active" invisible="1" />
             </tree>
