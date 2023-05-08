@@ -86,6 +86,7 @@ class G2PEntitlement(models.Model):
         [("paid", "Paid"), ("notpaid", "Not Paid")], compute="_compute_payment_status"
     )
     payment_date = fields.Date(compute="_compute_payment_date")
+    amount_paid = fields.Monetary(compute="_compute_amount_paid")
 
     _sql_constraints = [
         (
@@ -164,6 +165,11 @@ class G2PEntitlement(models.Model):
         for rec in self:
             for payment in rec.payment_ids:
                 rec.payment_date = payment.payment_datetime
+
+    def _compute_amount_paid(self):
+        for rec in self:
+            for payment in rec.payment_ids:
+                rec.amount_paid = payment.amount_paid
 
     @api.autovacuum
     def _gc_mark_expired_entitlement(self):

@@ -211,9 +211,41 @@ class G2PProgramMembership(models.Model):
         member = self
         for em in eligibility_managers:
             member = em.enroll_eligible_registrants(member)
+        message = None
+        kind = "success"
         if len(member) == 0:
             self.state = "not_eligible"
-        return
+            message = "beneficiary is not eligible"
+            kind = "warning"
+            return {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": _("Enrollment"),
+                    "message": message,
+                    "sticky": True,
+                    "type": kind,
+                    "next": {
+                        "type": "ir.actions.act_window_close",
+                    },
+                },
+            }
+        else:
+            message = "beneficiary is eligible"
+            kind = "success"
+            return {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": _("Enrollment"),
+                    "message": message,
+                    "sticky": True,
+                    "type": kind,
+                    "next": {
+                        "type": "ir.actions.act_window_close",
+                    },
+                },
+            }
 
     def enroll_eligible_registrants(self):
         eligibility_managers = self.program_id.get_managers(
