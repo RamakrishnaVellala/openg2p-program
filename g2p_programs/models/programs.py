@@ -39,6 +39,7 @@ class G2PProgram(models.Model):
             return None
 
     name = fields.Char(required=True)
+    description = fields.Text(string="description")
     company_id = fields.Many2one("res.company", default=lambda self: self.env.company)
     target_type = fields.Selection(
         selection=[("group", "Group"), ("individual", "Individual")], default="group"
@@ -96,7 +97,9 @@ class G2PProgram(models.Model):
 
     # Statistics
     eligible_beneficiaries_count = fields.Integer(
-        string="# Eligible Beneficiaries", readonly=True
+        string="# Eligible Beneficiaries",
+        readonly=True,
+        compute="_compute_eligible_beneficiary_count",
     )
     beneficiaries_count = fields.Integer(string="# Beneficiaries", readonly=True)
 
