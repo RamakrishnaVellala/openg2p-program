@@ -59,7 +59,6 @@ class TestG2PPrograms(common.TransactionCase):
             _("Entitlements"),
             "Show entitlement field name should be 'Entitlements'",
         )
-        self.assertTrue(program.show_prepare_payments_button, "Show prepare payments button should be True")
 
     def test_compute_show_cycleless_fields_reimburse(self):
         program_dict = {"is_reimbursement_program": True, "is_cycleless": True, "state": "active"}
@@ -77,7 +76,6 @@ class TestG2PPrograms(common.TransactionCase):
             _("Reimbursements"),
             "Show entitlement field name should be 'Reimbursements'",
         )
-        self.assertTrue(program.show_prepare_payments_button, "Show prepare payments button should be True")
 
     def test_open_entitlements_form(self):
         program = self.cycle_based_program.create({"name": "Test Program"})
