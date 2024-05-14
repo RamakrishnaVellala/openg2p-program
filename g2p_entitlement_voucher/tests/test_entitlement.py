@@ -21,7 +21,7 @@ class TestG2PEntitlement(TransactionCase):
                 "program_id": self.program.id,
                 "partner_id": self.partner.id,
                 "cycle_id": self.cycle.id,
-                "state": "approved",
+                "state": "draft",
                 "initial_amount": 100,
             }
         )
@@ -29,13 +29,11 @@ class TestG2PEntitlement(TransactionCase):
     def test_compute_show_voucher_buttons(self):
         self.entitlement.state = "approved"
         self.entitlement._compute_show_voucher_buttons()
-        print("show_generate_voucher_button:", self.entitlement.show_generate_voucher_button)
         self.assertTrue(self.entitlement.show_generate_voucher_button)
 
     def test_generate_vouchers_action(self):
         self.entitlement.state = "approved"
         action = self.entitlement.generate_vouchers_action()
-        print("action:", action)
         self.assertTrue(action)
 
     def test_print_voucher_action(self):
