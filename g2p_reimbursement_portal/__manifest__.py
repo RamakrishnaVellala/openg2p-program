@@ -14,10 +14,12 @@
         "views/g2p_portal_form_template.xml",
         "views/g2p_portal_form_submitted.xml",
         "views/g2p_portal_dashboard.xml",
+        "views/base.xml",
         "views/home.xml",
         "views/login.xml",
         "views/profile.xml",
         "views/website_page.xml",
+        "views/menu_view.xml",
     ],
     "assets": {
         "website.assets_wysiwyg": [
